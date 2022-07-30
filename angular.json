@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "matchy"
+  "cli": {
+    "analytics": false
+  }
 }
