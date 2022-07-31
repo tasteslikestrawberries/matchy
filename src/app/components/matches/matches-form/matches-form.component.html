@@ -25,7 +25,7 @@
       >
         <mat-label>Player 1</mat-label>
         <mat-select formControlName="player1Name" required>
-          <mat-option *ngFor="let player of players" [value]="player.name">
+          <mat-option *ngFor="let player of availablePlayers1" [value]="player.name">
             {{ player.name }}
           </mat-option>
         </mat-select>
@@ -61,7 +61,7 @@
       >
         <mat-label>Player 2</mat-label>
         <mat-select formControlName="player2Name" required>
-          <mat-option *ngFor="let player of players" [value]="player.name">
+          <mat-option *ngFor="let player of availablePlayers2" [value]="player.name">
             {{ player.name }}
           </mat-option>
         </mat-select>

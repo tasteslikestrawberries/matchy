@@ -20,6 +20,8 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   match?: IMatch;
   playerSub?: Subscription;
   players!: IPlayer[];
+  availablePlayers1!: IPlayer[];
+  availablePlayers2!: IPlayer[];
 
   matchForm = this.fb.group({
     player1Name: ['', Validators.required],
@@ -38,6 +40,16 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchPlayers();
+    this.matchForm.controls.player1Name.valueChanges.subscribe(value => {
+      this.availablePlayers2 = this.filterPlayers(value!)
+    })
+    this.matchForm.controls.player2Name.valueChanges.subscribe(value => {
+      this.availablePlayers1 = this.filterPlayers(value!)
+    })
+  }
+
+  filterPlayers(playerName: string) {
+    return this.players.filter(player => player.name !== playerName)
   }
 
   //for validators to access form values
@@ -49,11 +61,20 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
     return this.matchForm.get("points2") as FormArray
   }
 
+  showPlayers1() {
+    return this.players.filter(player => player.name !== this.matchForm.controls.player1Name.value)
+  }
+  showPlayers2() {
+    return this.players.filter(player => player.name !== this.matchForm.controls.player2Name.value)
+  }
+
 
   fetchPlayers() {
     this.playerSub = this.playerService.getPlayers().pipe(
       tap((data: any) => {
         this.players = data;
+        this.availablePlayers1 = data;
+        this.availablePlayers2 = data;
       })
     ).subscribe();
   }
@@ -102,9 +123,9 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   calculateSetsWon() {
     let firstPlayerWins = 0;
     let secondPlayerWins = 0;
-    for(let i = 0; i<this.points1.length; i++) {
-    
-      if(this.points1.value[i].set > this.points2.value[i].set) {
+    for (let i = 0; i < this.points1.length; i++) {
+
+      if (this.points1.value[i].set > this.points2.value[i].set) {
         ++firstPlayerWins
       } else ++secondPlayerWins
     }
@@ -112,11 +133,11 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   }
 
   setWinner(match: IMatch) {
-   if(match.player1.setsWon > match.player2.setsWon) {
-    match.winner = match.player1.name
-   } else {
-    match.winner = match.player2.name
-   }
+    if (match.player1.setsWon > match.player2.setsWon) {
+      match.winner = match.player1.name
+    } else {
+      match.winner = match.player2.name
+    }
   }
 
   navigateToMain() {
