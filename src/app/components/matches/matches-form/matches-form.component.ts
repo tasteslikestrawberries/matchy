@@ -22,6 +22,7 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   players!: IPlayer[];
   availablePlayers1!: IPlayer[];
   availablePlayers2!: IPlayer[];
+  playerNameSub!: Subscription;
 
   matchForm = this.fb.group({
     player1Name: ['', Validators.required],
@@ -40,12 +41,7 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchPlayers();
-    this.matchForm.controls.player1Name.valueChanges.subscribe(value => {
-      this.availablePlayers2 = this.filterPlayers(value!)
-    })
-    this.matchForm.controls.player2Name.valueChanges.subscribe(value => {
-      this.availablePlayers1 = this.filterPlayers(value!)
-    })
+    this.listenToPlayerNameChanges();
   }
 
   filterPlayers(playerName: string) {
@@ -140,12 +136,22 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  listenToPlayerNameChanges() {
+    this.playerNameSub = this.matchForm.controls.player1Name.valueChanges.subscribe(value => {
+      this.availablePlayers2 = this.filterPlayers(value!)
+    })
+    this.matchForm.controls.player2Name.valueChanges.subscribe(value => {
+      this.availablePlayers1 = this.filterPlayers(value!)
+    })
+  }
+
   navigateToMain() {
     this.router.navigate(['/'])
   }
 
   ngOnDestroy(): void {
     this.playerSub?.unsubscribe();
+    this.playerNameSub.unsubscribe();
   }
 
 }
