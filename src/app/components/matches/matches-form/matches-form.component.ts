@@ -79,7 +79,6 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
 
     this.setWinner(this.match);
     this.matchService.addMatch(this.match);
-    console.log(this.match)
     this.formGroupDirective.resetForm();
     this.navigateToMain();
   }
@@ -92,7 +91,6 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
       this.points1.push(this.createNewSet());
       this.points2.push(this.createNewSet());
     }
-    console.log(this.matchForm)
   }
 
   createNewSet(): FormGroup {
@@ -105,7 +103,8 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
     let firstPlayerWins = 0;
     let secondPlayerWins = 0;
     for(let i = 0; i<this.points1.length; i++) {
-      if(this.points1.value[i] > this.points2.value[i]) {
+    
+      if(this.points1.value[i].set > this.points2.value[i].set) {
         ++firstPlayerWins
       } else ++secondPlayerWins
     }

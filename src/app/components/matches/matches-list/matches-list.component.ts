@@ -36,7 +36,6 @@ export class MatchesListComponent implements OnInit {
     this.matches$ = this.matchService.getMatches().pipe(
       tap((data: any) => {
         this.matches = data;
-        console.log(this.matches)
         this.resetDataSource()
       })
     );

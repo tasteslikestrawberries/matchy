@@ -36,7 +36,6 @@ export class PlayersListComponent implements OnInit {
     this.players$ = this.playerService.getPlayers().pipe(
       tap((data: any) => {
         this.players = data;
-        console.log(this.players)
         this.resetDataSource()
       })
     );
@@ -60,6 +59,7 @@ export class PlayersListComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
+
   }
 
   showDetails(id: string) {
