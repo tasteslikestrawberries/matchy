@@ -31,4 +31,13 @@ export class MatchService {
     this.http.post<IMatch>(this.url, match).subscribe();
   }
 
+
+  deleteMatch(id: string) {
+    this.http
+      .delete<IMatch>(
+        `https://matchy-acb41-default-rtdb.europe-west1.firebasedatabase.app/matches/${id}.json`
+      )
+      .subscribe();
+  }
+
 }

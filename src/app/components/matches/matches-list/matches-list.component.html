@@ -61,7 +61,13 @@
     <mat-cell *matCellDef="let match"
       ><button (click)="showDetails(match.id)">
         <mat-icon>info</mat-icon>
-      </button></mat-cell
+      </button>
+
+      <button type="button" class="deleteBtn" (click)="deleteMatch(match.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+      </mat-cell
     >
   </ng-container>
 

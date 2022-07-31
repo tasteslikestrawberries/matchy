@@ -72,4 +72,10 @@ export class MatchesListComponent implements OnInit {
     });
   }
 
+  deleteMatch(id: string) {
+    this.matchService.deleteMatch(id);
+    this.matches = this.matches.filter( (match: IMatch) => match.id !== id);
+    this.resetDataSource();
+  }
+
 }
