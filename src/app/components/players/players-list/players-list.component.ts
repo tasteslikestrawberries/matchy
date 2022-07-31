@@ -73,4 +73,10 @@ export class PlayersListComponent implements OnInit {
     });
   }
 
+  deletePlayer(id: string) {
+    this.playerService.deletePlayer(id);
+    this.players = this.players.filter( (player: IPlayer) => player.id !== id);
+    this.resetDataSource();
+  }
+
 }

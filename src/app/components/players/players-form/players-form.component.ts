@@ -32,6 +32,6 @@ export class PlayersFormComponent {
   }
 
   navigateToMain() {
-    this.router.navigate(['/players-list'])
+    this.router.navigate(['/'])
   }
 }

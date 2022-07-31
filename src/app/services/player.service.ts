@@ -31,4 +31,12 @@ export class PlayerService {
     this.http.post<IPlayer>(this.url, player).subscribe();
   }
 
+  deletePlayer(id: string) {
+    this.http
+      .delete<IPlayer>(
+        `https://matchy-acb41-default-rtdb.europe-west1.firebasedatabase.app/players/${id}.json`
+      )
+      .subscribe();
+  }
+
 }
