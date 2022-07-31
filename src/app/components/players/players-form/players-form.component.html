@@ -1,0 +1,47 @@
+<div class="formWrapper">
+  <mat-card-title>Add Player</mat-card-title>
+  <form [formGroup]="playerForm" (ngSubmit)="onSubmit()" novalidate>
+    <!--NAME-->
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name" required />
+      <mat-icon *ngIf="f.name.valid" matSuffix
+        >sentiment_very_satisfied</mat-icon
+      >
+      <mat-icon *ngIf="f.name.touched && f.name.errors" matSuffix
+        >sentiment_dissatisfied</mat-icon
+      >
+      <mat-error *ngIf="f.name.touched && f.name.errors"
+        >This field is required.</mat-error
+      >
+    </mat-form-field>
+
+    <!--EMAIL-->
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        formControlName="email"
+        required
+      />
+      <mat-icon *ngIf="f.email.valid" matSuffix
+        >sentiment_very_satisfied</mat-icon
+      >
+      <mat-icon *ngIf="f.email.touched && f.email.errors" matSuffix
+        >sentiment_dissatisfied</mat-icon
+      >
+      <mat-error *ngIf="f.email.touched && f.email.errors"
+        >Please enter valid email.</mat-error
+      >
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="playerForm.touched && !playerForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

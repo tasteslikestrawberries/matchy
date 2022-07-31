@@ -1,0 +1,168 @@
+<div class="formWrapper">
+  <mat-card-title>Add Match</mat-card-title>
+  <form [formGroup]="matchForm" (ngSubmit)="onSubmit()" novalidate>
+    <!--PLAYER 1-->
+    <div class="playerWrapper">
+      <mat-form-field
+        class="playerField"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>Player 1</mat-label>
+        <mat-select formControlName="player1Name" required>
+          <mat-option *ngFor="let player of players" [value]="player.name">
+            {{ player.name }}
+          </mat-option>
+        </mat-select>
+        <mat-icon *ngIf="f.player1Name.valid" matSuffix
+          >sentiment_very_satisfied</mat-icon
+        >
+        <mat-icon
+          *ngIf="f.player1Name.touched && f.player1Name.errors"
+          matSuffix
+          >sentiment_dissatisfied</mat-icon
+        >
+        <mat-error *ngIf="f.player1Name.touched && f.player1Name.errors"
+          >This field is required.</mat-error
+        >
+      </mat-form-field>
+
+      <!--SET 1 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>1</mat-label>
+        <input matInput formControlName="p1s1" type="number" required />
+        <mat-error *ngIf="f.p1s1.touched && f.p1s1.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 2 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>2</mat-label>
+        <input matInput formControlName="p1s2" type="number" required />
+        <mat-error *ngIf="f.p1s2.touched && f.p1s2.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 3 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>3</mat-label>
+        <input matInput formControlName="p1s3" type="number" required />
+        <mat-error *ngIf="f.p1s3.touched && f.p1s3.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 4 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>4</mat-label>
+        <input matInput formControlName="p1s4" type="number" required />
+        <mat-error *ngIf="f.p1s4.touched && f.p1s4.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 5 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>5</mat-label>
+        <input matInput formControlName="p1s5" type="number" required />
+        <mat-error *ngIf="f.p1s5.touched && f.p1s5.errors"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--PLAYER 2-->
+    <div class="playerWrapper">
+      <mat-form-field
+        class="playerField"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>Player 2</mat-label>
+        <mat-select formControlName="player2Name" required>
+          <mat-option *ngFor="let player of players" [value]="player.name">
+            {{ player.name }}
+          </mat-option>
+        </mat-select>
+        <mat-icon *ngIf="f.player2Name.valid" matSuffix
+          >sentiment_very_satisfied</mat-icon
+        >
+        <mat-icon
+          *ngIf="f.player2Name.touched && f.player2Name.errors"
+          matSuffix
+          >sentiment_dissatisfied</mat-icon
+        >
+        <mat-error *ngIf="f.player2Name.touched && f.player2Name.errors"
+          >This field is required.</mat-error
+        >
+      </mat-form-field>
+
+      <!--SET 1 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>1</mat-label>
+        <input matInput formControlName="p2s1" type="number" required />
+        <mat-error *ngIf="f.p2s1.touched && f.p2s1.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 2 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>2</mat-label>
+        <input matInput formControlName="p2s2" type="number" required />
+        <mat-error *ngIf="f.p2s2.touched && f.p2s2.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 3 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>3</mat-label>
+        <input matInput formControlName="p2s3" type="number" required />
+        <mat-error *ngIf="f.p2s3.touched && f.p2s3.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 4 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>4</mat-label>
+        <input matInput formControlName="p2s4" type="number" required />
+        <mat-error *ngIf="f.p2s4.touched && f.p2s4.errors"></mat-error>
+      </mat-form-field>
+      <!--SET 5 POINTS-->
+      <mat-form-field
+        class="pointInput"
+        appearance="outline"
+        floatLabel="always"
+      >
+        <mat-label>5</mat-label>
+        <input matInput formControlName="p2s5" type="number" required />
+        <mat-error *ngIf="f.p2s5.touched && f.p2s5.errors"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="matchForm.touched && !matchForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
