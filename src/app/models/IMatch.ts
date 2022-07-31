@@ -4,13 +4,14 @@ export interface IMatch {
     id: string,
     name: string,
     points?: number[],
-    setsWon?: number
+    setsWon: number
   },
   player2: {
     id: string,
     name: string,
     points?: number[], 
-    setsWon?: number
+    setsWon: number
   },
+  winner?: string
 }
 

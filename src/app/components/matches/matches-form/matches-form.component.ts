@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroupDirective, Validators, FormBuilder } from '@angular/forms';
+import { FormGroupDirective, Validators, FormBuilder, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap, Subscription } from 'rxjs';
 import { IMatch } from 'src/app/models/IMatch';
@@ -24,17 +24,11 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   matchForm = this.fb.group({
     player1Name: ['', Validators.required],
     player2Name: ['', Validators.required],
-    p1s1: ['', Validators.required],
-    p1s2: ['', Validators.required],
-    p1s3: ['', Validators.required],
-    p1s4: ['', Validators.required],
-    p1s5: ['', Validators.required],
-    p2s1: ['', Validators.required],
-    p2s2: ['', Validators.required],
-    p2s3: ['', Validators.required],
-    p2s4: ['', Validators.required],
-    p2s5: ['', Validators.required],
+    points1: this.fb.array([this.createNewSet()], [Validators.minLength(3), Validators.maxLength(5)]),
+    points2: this.fb.array([this.createNewSet()], [Validators.minLength(3), Validators.maxLength(5)])
   });
+
+  exceededMaximumSets = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +41,14 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   }
 
   //for validators to access form values
-  get f() { return this.matchForm.controls; } 
+  get f() { return this.matchForm.controls; }
+  get points1(): FormArray {
+    return this.matchForm.get("points1") as FormArray
+  }
+  get points2(): FormArray {
+    return this.matchForm.get("points2") as FormArray
+  }
+
 
   fetchPlayers() {
     this.playerSub = this.playerService.getPlayers().pipe(
@@ -60,21 +61,63 @@ export class MatchesFormComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     const formValues = this.matchForm.value;
+    const [firstPlayerWins, secondPlayerWins] = this.calculateSetsWon();
     this.match = {
       player1: {
         id: this.players.find((player) => player.name === formValues.player1Name)?.id!,
         name: formValues.player1Name!,
-        points: [+formValues.p1s1!, +formValues.p1s2!, +formValues.p1s3!, +formValues.p1s4!, +formValues.p1s5!]
+        points: this.points1.value.map((obj: any) => obj.set),
+        setsWon: firstPlayerWins
       },
       player2: {
         id: this.players.find((player) => player.name === formValues.player2Name)?.id!,
         name: formValues.player2Name!,
-        points: [+formValues.p2s1!, +formValues.p2s2!, +formValues.p2s3!, +formValues.p2s4!, +formValues.p2s5!]
-      }
+        points: this.points2.value.map((obj: any) => obj.set),
+        setsWon: secondPlayerWins
+      },
     }
+
+    this.setWinner(this.match);
     this.matchService.addMatch(this.match);
+    console.log(this.match)
     this.formGroupDirective.resetForm();
     this.navigateToMain();
+  }
+
+  addSetPoints() {
+    if (this.points1.length >= 5 || this.points2.length >= 5) {
+      this.exceededMaximumSets = true;
+      return
+    } else {
+      this.points1.push(this.createNewSet());
+      this.points2.push(this.createNewSet());
+    }
+    console.log(this.matchForm)
+  }
+
+  createNewSet(): FormGroup {
+    return new FormGroup({
+      'set': new FormControl('')
+    })
+  }
+
+  calculateSetsWon() {
+    let firstPlayerWins = 0;
+    let secondPlayerWins = 0;
+    for(let i = 0; i<this.points1.length; i++) {
+      if(this.points1.value[i] > this.points2.value[i]) {
+        ++firstPlayerWins
+      } else ++secondPlayerWins
+    }
+    return [firstPlayerWins, secondPlayerWins]
+  }
+
+  setWinner(match: IMatch) {
+   if(match.player1.setsWon > match.player2.setsWon) {
+    match.winner = match.player1.name
+   } else {
+    match.winner = match.player2.name
+   }
   }
 
   navigateToMain() {

@@ -2,9 +2,38 @@
 <mat-dialog-content>
   <ul>
     <li>
-      Players: {{ data.match.player1.name }} and {{ data.match.player2.name }}
+      Players: <b>{{ data.match.player1.name }}</b> and
+      <b>{{ data.match.player2.name }}</b>
     </li>
-    <li>Winner:</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Players</th>
+        <ng-container *ngFor="let point of data.match.player1.points; let i = index">
+          <th>Set {{ i + 1 }}</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.match.player1.name }}</td>
+        <ng-container *ngFor="let point of data.match.player1.points">
+          <td>{{ point }}</td>
+        </ng-container>
+      </tr>
+      <tr>
+        <td>{{ data.match.player2.name }}</td>
+        <ng-container *ngFor="let point of data.match.player2.points">
+          <td>{{ point }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li class="winner">Winner: <b>{{ data.match.winner }}</b></li>
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions>

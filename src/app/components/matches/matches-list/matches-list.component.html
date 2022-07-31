@@ -20,7 +20,11 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header
       >Player 1</mat-header-cell
     >
-    <mat-cell *matCellDef="let match">{{ match.player1.name }}</mat-cell>
+    <mat-cell
+      *matCellDef="let match"
+      [ngClass]="{ winner: match.player1.name === match.winner }"
+      >{{ match.player1.name }}</mat-cell
+    >
   </ng-container>
 
   <!-- Player1 Sets Won -->
@@ -28,7 +32,7 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header
       >Sets won</mat-header-cell
     >
-    <mat-cell *matCellDef="let match">{{ match.player1.name }}</mat-cell>
+    <mat-cell *matCellDef="let match">{{ match.player1.setsWon }}</mat-cell>
   </ng-container>
 
   <!-- Player2 Column -->
@@ -36,7 +40,11 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header
       >Player 2</mat-header-cell
     >
-    <mat-cell *matCellDef="let match">{{ match.player2.name }}</mat-cell>
+    <mat-cell
+      *matCellDef="let match"
+      [ngClass]="{ winner: match.player2.name === match.winner }"
+      >{{ match.player2.name }}</mat-cell
+    >
   </ng-container>
 
   <!-- Player2 Sets Won -->
@@ -44,7 +52,7 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header
       >Sets won</mat-header-cell
     >
-    <mat-cell *matCellDef="let match">{{ match.player1.name }}</mat-cell>
+    <mat-cell *matCellDef="let match">{{ match.player2.setsWon }}</mat-cell>
   </ng-container>
 
   <!-- Actions Column -->

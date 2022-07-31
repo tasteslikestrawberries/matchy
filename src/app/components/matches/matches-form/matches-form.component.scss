@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.addSetBtn {
+  display:flex;
+  justify-content: flex-end;
+  margin:1rem;
+}
+
+.exceededMaximumSets {
+  margin-bottom: 1rem;
+}
+
 .playerWrapper {
   display:flex;
   gap:0.5rem;
@@ -24,6 +34,16 @@
 
 .pointInput {
   width: 50px;
+}
+
+.addSet {
+  display:flex;
+  align-items: center;
+}
+
+.sets {
+  display:flex;
+  gap: 0.5rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
