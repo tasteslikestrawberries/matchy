@@ -1,6 +1,7 @@
 # Matchy
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/73844750/182032639-2d7c561f-2374-4dc8-8d3c-f66be4252dfd.png">
 
 ## Development server
 
