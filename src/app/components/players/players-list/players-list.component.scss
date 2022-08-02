@@ -11,3 +11,7 @@ button {
 .mat-spinner {
   margin:2rem auto;
 }
+
+:host::ng-deep .totalSets  {
+  justify-content: center;
+}
