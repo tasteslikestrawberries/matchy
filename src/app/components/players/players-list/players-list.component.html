@@ -8,7 +8,7 @@
   >Error: {{ error.message }}</mat-error
 >
 
-<mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+<mat-table [dataSource]="dataSource" matSort>
   <!-- Idx Column -->
   <ng-container matColumnDef="idx">
     <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
@@ -26,6 +26,12 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
     <mat-cell *matCellDef="let player">{{ player.email }}</mat-cell>
   </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="totalSetsWon">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total Sets Won</mat-header-cell>
+      <mat-cell class="totalSets" *matCellDef="let player">{{ player.totalSetsWon }}</mat-cell>
+    </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
